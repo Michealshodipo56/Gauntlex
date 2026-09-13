@@ -1,0 +1,13 @@
+/* Intentionally minimal — real styling/theme comes once the UI style guide is provided. */
+:root {
+  color-scheme: light dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}

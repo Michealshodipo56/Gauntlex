@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: gauntlex-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: FRONTEND_ORIGIN
+        value: https://gauntlex.vercel.app
+      - key: DATABASE_URL
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: AI_PROVIDER
+        value: anthropic
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
