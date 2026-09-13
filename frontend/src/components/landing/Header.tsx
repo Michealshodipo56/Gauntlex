@@ -20,12 +20,12 @@ export function Header() {
           <Logo size={34} showTagline />
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link}
               href="#"
-              className="text-[0.95rem] font-medium text-midnight/70 transition-colors hover:text-midnight"
+              className="text-sm font-medium text-gray-600 transition-colors hover:text-midnight"
             >
               {link}
             </a>
@@ -33,28 +33,28 @@ export function Header() {
         </nav>
 
         <div className="hidden flex-1 items-center justify-center px-4 md:flex lg:max-w-xs">
-          <label className="flex w-full items-center gap-2 rounded-full bg-midnight/[0.05] px-4 py-2 text-sm text-midnight/50 transition-colors focus-within:bg-midnight/[0.08]">
-            <Search size={16} className="shrink-0" />
+          <label className="flex w-full items-center gap-2.5 rounded-full border border-gray-200/80 bg-[#f4f5f7] px-4 py-2 text-xs text-gray-400 transition-colors focus-within:border-gray-300 focus-within:bg-white">
+            <Search size={14} className="shrink-0 text-gray-400" />
             <input
               type="text"
               placeholder="Search tasks, languages, topics..."
-              className="w-full bg-transparent text-midnight outline-none placeholder:text-midnight/45"
+              className="w-full bg-transparent text-xs text-midnight outline-none placeholder:text-gray-400"
             />
           </label>
         </div>
 
-        <div className="hidden items-center gap-3 sm:flex">
+        <div className="hidden items-center gap-4 sm:flex">
           <button
             type="button"
-            className="rounded-full px-4 py-2 text-sm font-semibold text-midnight transition-colors hover:bg-midnight/5"
+            className="px-2 py-2 text-sm font-semibold text-gray-700 transition-colors hover:text-midnight"
           >
             Log in
           </button>
           <motion.button
             type="button"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="rounded-full bg-violet px-5 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-6px_rgba(106,0,255,0.6)] transition-shadow hover:shadow-[0_10px_26px_-6px_rgba(106,0,255,0.75)]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="rounded-lg bg-[#6001ff] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(96,1,255,0.35)] transition-all hover:bg-[#5200db]"
           >
             Sign Up
           </motion.button>
