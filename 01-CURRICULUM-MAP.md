@@ -8,19 +8,32 @@
 
 ---
 
+## Revision note: this version is grounded in the real platform graph, not just README inference
+
+An earlier version of this document reconstructed ordering purely from README cross-references — a defensible best-effort, but genuinely not the same thing as the real arrangement. It's been substantially corrected using two much stronger sources:
+
+1. **A screenshot of the actual 01-edu student-facing curriculum graph** — confirmed firsthand by a student who went through the Go piscine on this exact platform ("that is the actual graph from 01 edu that is/we used — you click on those dots and the task opens"). This is 01-edu's own visualization of the `object`/`object_child` hierarchy described in §2 — i.e., the real thing, not a guess at it.
+2. **Direct student testimony** of the actual order experienced: the one-month Go piscine (starting with a shell warm-up, then the main Go piscine), followed immediately by a confirmed project sequence (`go-reloaded` → `ascii-art` → `ascii-art-web` → `groupie-tracker` → `lem-in` → `forum`), followed by the JavaScript piscine. This is cross-validated three independent ways: it matches the green "completed" path traced through the graph image, it matches a connected arc in the graph labeled **"Imperative"**, and every project named is confirmed to exist in the repo with exactly the sub-folder structure (optional `ascii-art-color`/`-justify`/`-output`/`-reverse`/`-fs`, etc.) the student described.
+
+**What the graph reveals that pure README analysis couldn't:** the core curriculum isn't one linear chain — it's organized into (at least) **five parallel named tracks**, visible as labeled arcs in the graph: **Imperative, Algorithm, Architecture, Full-Stack, AdminSys**. Piscines (Go/JS/Rust/Java) sit as large hub nodes gating progress between waves of these tracks. Stars in the graph mean "mandatory, must be done to proceed"; dots mean "optional, can be done anytime or skipped" (Gauntlex will make everything mandatory regardless, per the user's direction, but the star/dot distinction is still useful signal for which items were designed as core-path vs. supplementary). Each piscine also has **its own internal sub-graph** (for Go, labeled by "Quest") — the piscine is not just a pile of exercises, it's its own mini curriculum-graph nested inside the main one.
+
+**What this revision does NOT resolve:** the student's memory of the exact shell-piscine exercise names (`hello.sh`, `lookout.sh`, `mastertheboss.sh`, `skip.sh`, `myfirstcommit.sh`, `repository`, `status.sh`, `push.sh`) — while completely trustworthy as an account of what they did — **do not exist under those names anywhere in the `Michealshodipo56/01` repo snapshot this document is built from.** Either that selection-stage content lives in a different, non-public repo, the repo has been restructured since, or the platform shows custom display titles distinct from the underlying repo folder slugs. This is flagged, not silently resolved — see §4.0 and §8.
+
+---
+
 ## Table of Contents
 
 1. [What is 01-edu? (Pedagogy Overview)](#1-what-is-01-edu-pedagogy-overview)
 2. [Repo Structure Inventory](#2-repo-structure-inventory)
 3. [How Verification Works in the Source Repo](#3-how-verification-works-in-the-source-repo)
 4. [The Core Curriculum — Proposed Arrangement](#4-the-core-curriculum--proposed-arrangement)
+   - 4.0 [Two rules that unlock the whole repo's structure](#40-two-rules-that-unlock-the-whole-repos-structure)
    - 4.1 [Piscine Go](#41-piscine-go-246-exercises)
    - 4.2 [Piscine JavaScript](#42-piscine-javascript-128-exercises)
    - 4.3 [Piscine Rust](#43-piscine-rust-35-exercises)
    - 4.4 [Piscine Shell/CLI](#44-piscine-shellcli-13-exercises)
    - 4.5 [Sysadmin Piscine (`sys/`)](#45-sysadmin-piscine-sys)
-   - 4.6 [Core Projects (the ~50-project phase)](#46-core-projects-the-post-piscine-project-phase)
-   - 4.7 [Bonus / Optional Sub-Features](#47-bonus--optional-sub-features-of-core-projects)
+   - 4.6 [The Five Core Tracks (the post-piscine project phase)](#46-the-five-core-tracks-the-post-piscine-project-phase)
 5. [The Specialization Branches](#5-the-specialization-branches)
    - 5.1 [Artificial Intelligence](#51-artificial-intelligence-branch)
    - 5.2 [Blockchain & Crypto](#52-blockchain--crypto-branch)
@@ -164,7 +177,31 @@ Three top-level folders contain real, runnable test suites:
 
 ## 4. The Core Curriculum — Proposed Arrangement
 
-Everything in this section covers the ~792 top-level `subjects/` folders that aren't one of the 9 branch containers — i.e., the language piscines and the ~50-project phase between them.
+### 4.0 Two rules that unlock the whole repo's structure
+
+Two things confirmed this revision, one from a screenshot of the real platform graph, one from direct testimony, that together explain the entire `subjects/` layout — not just guess at it:
+
+**Rule 1 — standalone folder vs. related group.** *"folders with other tasks in them are related, just like ascii-art and ascii-art-web — standalone folders are single tasks."* This was checked mechanically against all 807 top-level folders (a folder only counts as "related children" if the child itself has its own `README.md` — a stray `resources/`/`data/`/`images/` folder doesn't count, it's just an asset directory for one task, not a second task):
+
+- **784 folders are standalone** — one task, done in isolation (e.g. `net-cat`, `push-swap`, `corewar`, `git`, the vast majority of piscine exercises).
+- **17 folders are genuine parent-and-related-children groups** at the core-curriculum level: `0-shell` (+2), `ascii-art` (+6: `color`, `examples`, `fs`, `justify`, `output`, `reverse`), `ascii-art-web` (+3: `dockerize`, `export-file`, `stylize`), `forum` (+5: `advanced-features`, `authentication`, `image-upload`, `moderation`, `security`), `groupie-tracker` (+4: `filters`, `geolocalization`, `search-bar`, `visualizations`), `lem-in` (+1: `examples`), `make-your-game` (+3: `different-maps`, `history`, `score-handling`), `real-time-forum` (+1: `typing-in-progress`), `social-network` (+1: `cross-platform-appimage`), `tetris-optimizer` (+11 test-fixture folders).
+- **8 folders are branch containers with no task of their own** — `ai`, `AI.GO`, `blockchain`, `cybersecurity`, `devops`, `gaming`, `mobile-dev` all have *zero* README at their own top level; every one of their dozens-to-hundreds of children is the real task. `java` and `user-experience` are the same idea one level deeper (`java/piscine/`, `java/checkpoints/`, `java/projects/`, `java/raids/` are pure containers; the actual tasks are the folders inside those).
+
+This is really the same design principle applied at two scales: a branch (`blockchain/`) is a big group of related tasks, and inside it a handful of projects (`blockchain/decentralized-finance` doesn't have its own children, but plenty of core-curriculum projects like `ascii-art` do) are themselves smaller groups. **Every ordering table in this document that lists a project should be read as "do this, then its related children in the order shown, then move to the next line" — the children are not a separate later phase.**
+
+**Rule 2 — the graph is real, and it's not one line.** A screenshot of 01-edu's actual student-facing curriculum graph, confirmed firsthand by someone who used it for the Go piscine, shows the core curriculum organized into **five parallel labeled tracks** — **Imperative, Algorithm, Architecture, Full-Stack, AdminSys** — radiating from a center, with the four language piscines (Go, JS, Rust, Java) as large hub nodes gating progress between waves, and the eight specialization branches as outer arcs beyond that. Stars = mandatory-to-proceed; dots = optional/anytime (Gauntlex will make everything mandatory regardless, per direction, but the distinction still tells you what 01-edu itself considered core-path vs. supplementary). Each piscine also has **its own nested sub-graph** (for Go, explicitly labeled "Quest") — opening a piscine hub reveals its own quest list, the same group/standalone idea one level further in.
+
+**Directly confirmed, three independent ways** (student memory, the green "completed" path traced through the graph image, and the "Imperative" arc label): the Go piscine is immediately followed by exactly this project sequence, before JavaScript starts —
+
+```
+go-reloaded → ascii-art (+ color, fs, justify, output, reverse) → ascii-art-web (+ dockerize, export-file, stylize)
+→ groupie-tracker (+ filters, geolocalization, search-bar, visualizations) → lem-in (+ examples) → forum (+ advanced-features, authentication, image-upload, moderation, security)
+→ [ Piscine JavaScript ]
+```
+
+Every name in that chain exists in the repo with exactly the related-children structure described above — this is the strongest-evidence sequence in this entire document, and it anchors everything else in this section.
+
+**What's still not confirmed:** the exact shell-piscine task names from direct memory (`hello.sh`, `lookout.sh`, `mastertheboss.sh`, `skip.sh`, `myfirstcommit.sh`, `repository`, `status.sh`, `push.sh`) don't exist under those names in this repo snapshot — that selection-stage content likely lives elsewhere (see §8). And beyond "Go piscine → the six items above → JS piscine," nobody who contributed evidence to this document has personally verified the platform's order past that point — everything else in §4.1–4.7 below is the graph's *spatial layout* (which track a project sits in, roughly how far from the center) plus README crossreferences, which is weaker evidence than the confirmed chain above but much stronger than guessing from folder names alone.
 
 ### 4.1 Piscine Go (246 exercises)
 
@@ -237,76 +274,37 @@ This cluster forms its own clean, story-driven progression and — per the offic
 
 **Only the first 6 (`linux` through `scan`) have real subject+audit content today.** Everything from `upgrade` onward is either "WIP" or entirely absent — this is planned curriculum, not shippable content. If the skill-tree image you have shows an "AdminSys" track with more than 6 nodes, most of it doesn't exist in this repo snapshot yet.
 
-### 4.6 Core Projects (the post-piscine project phase)
+### 4.6 The Five Core Tracks (the post-piscine project phase)
 
-The genuine multi-week flagship projects, reconstructed from explicit in-README cross-references (e.g. `ascii-art-web` literally says "your last project, **ascii-art**"; `real-time-forum` says "remember the forum you did a while ago?"; `mini-framework` says it "will be tested by using it... in the social network project," which corrected a naive ordering assumption). Confidence and rough duration are estimates unless otherwise noted — very few project READMEs state an explicit duration.
+This replaces treating the ~29 flagship projects as one flat list. The graph shows them as **five labeled, parallel tracks**, each gated by language piscines. Within a track, order comes from explicit README cross-references (`ascii-art-web` → "your last project, **ascii-art**"; `real-time-forum` → "remember the forum you did a while ago?"; `smart-road` → "remember the `road_intersection` raid... in the Rust Piscine?"). Across tracks, the confirmed chain in §4.0 anchors Imperative right after Go piscine; everything else is graph-position + dependency inference — genuinely weaker evidence, flagged per track. Per Rule 1 (§4.0), every project with related children lists them inline with `+`; do those before moving to the next project.
 
-| # | Project | Language/Stack | Description | Confidence |
-|---|---|---|---|---|
-| 1 | `git` ("Git Ready") | Git/CLI | Branching, remotes, merge/rebase exercises — arguably a one-time onboarding gate rather than "project #1," your call. | Medium |
-| 2 | `ascii-art` | Go | Render a string as ASCII-art banner text. | High |
-| 3 | `ascii-art-web` | Go, HTML/CSS | Wraps ascii-art in an HTTP server + web GUI. Explicit sequel. | High |
-| 4 | `net-cat` | Go, TCP sockets | Recreate `netcat` as a TCP group-chat server/client. | High |
-| 5 | `push-swap` | Go, algorithms | Sort a stack using two stacks + minimal instructions; write a checker. | High |
-| 6 | `filler` | Go, algorithms/AI | Territory-capture bot game. | High |
-| 7 | `wget` | Go/Rust/C (your choice) | Recreate `wget`: download, rate-limit, background, recursive mirroring. | High |
-| 8 | `groupie-tracker` | Go, HTML/CSS | Consume a bands/artists JSON API, build a data-viz site. | High |
-| 9 | `graphql` | JavaScript + school's GraphQL API | Login + personal profile page (XP/grades/audits) with SVG graphs. | Medium-High |
-| 10 | `forum` | Go, SQLite, HTML/CSS/JS | Web forum: registration, posts, categories, likes, comments. | High |
-| 11 | `lem-in` | Go, graph algorithms | Move max "ants" through a colony graph in fewest turns. | High |
-| 12 | `stock-exchange-sim` | Go/Rust/C | Task-scheduling optimizer + checker. | Medium |
-| 13 | `corewar` | Go, VM/assembly | Build a VM + assembler for a Core War battle. | High |
-| 14 | `atm-management-system` | C | Extend a given ATM codebase (new-language adaptation). | Medium |
-| 15 | `system-monitor` | C++, Dear ImGui | Extend a given ImGui app to monitor CPU/RAM/network. | Medium |
-| 16 | `netfix` | Python (Django) | Extend a given Django services marketplace. | Medium |
-| 17 | `shop` | Ruby on Rails | Extend a given Rails e-commerce app. | Medium |
-| 18 | `mister-quiz` | PHP (Laravel) | Extend a given Laravel quiz-game site. | Medium |
-| 19 | `clonernews` | JavaScript, HN API | Hacker News-style live-updating UI. | Medium (possibly a JS-piscine raid, not a project — see §6) |
-| 20 | `real-time-forum` | Go, SQLite, JS, WebSockets | SPA rebuild of `forum` + private messaging. Explicit sequel. | High |
-| 21 | `mini-framework` | JavaScript | Build your own minimal frontend framework + TodoMVC. Precedes/feeds `social-network`. | Medium-High |
-| 22 | `social-network` | Go, SQLite, any JS framework | Facebook-style app: followers, groups, chat, notifications. | High |
-| 23 | `make-your-game` | JavaScript, on your own framework | Original browser game, strict 60fps performance bar. | High |
-| 24 | `bomberman-dom` | JavaScript, on your own framework | Multiplayer Bomberman clone, same perf rules as above. | High |
-| 25 | `0-shell` | Rust, Unix syscalls | Minimal BusyBox-style shell from scratch. | High |
-| 26 | `smart-road` | Rust, SDL2 | Traffic sim without lights. Explicit sequel to the `road_intersection` Rust-piscine raid. | High |
-| 27 | `multiplayer-fps` | Rust/other, UDP | "Maze Wars"-style multiplayer FPS. | Medium |
-| 28 | `zappy` | Go/C + any client language | Team "AI civilization" game, autonomous agents. | Medium |
-| 29 | `tron` | JavaScript, provided game engine | Write an AI player for a Tron light-cycle battle. | Medium-Low |
+**Track 1 — Imperative** (Go-language, directly after Go piscine). **Confidence: High — this exact chain is the best-evidenced sequence in this document.**
 
-**Items in this bucket that are NOT projects** (piscine exercises/exams that just happened to have long READMEs): `add-vm`, `linux`, `login`, `connect`, `remote`, `scan` (all belong to §4.5's sysadmin table), `road_intersection` (Rust-piscine raid, prerequisite to `smart-road`), `teacher` (bash exam), `guess-it-1`/`guess-it-2` (chained Go stats exercises), `tetris-optimizer` (Go piscine exam — has a literal `hardexam/` subfolder), `sortable` (JS piscine day exercise), `block-chain` (JS piscine exercise — see the false-positive note in §5.2), `minesweeper` (Rust piscine exercise), `dr-strange` (JS date-arithmetic exercise, misleading name), `events` (Rust piscine exam), `commandments` (onboarding read, literally `duration: 1 hour` in its frontmatter), `where-do-we-go-dom` (JS/DOM exercise), `friend-support`/`gatecrashers`/`uninvited` (chained JS server exercises), `free-project` (JS-piscine raid — build a personal site), `how-2-js`/`good-practices`/`introduction` (piscine reference material), `sys` (the table above, not an exercise itself).
+`git` → `go-reloaded` → `ascii-art` (+ `color`, `fs`, `justify`, `output`, `reverse`, `examples`) → `ascii-art-web` (+ `dockerize`, `export-file`, `stylize`) → `groupie-tracker` (+ `filters`, `geolocalization`, `search-bar`, `visualizations`) → `lem-in` (+ `examples`) → `forum` (+ `advanced-features`, `authentication`, `image-upload`, `moderation`, `security`)
 
-### 4.7 Bonus / Optional Sub-Features of Core Projects
+`git` is placed first as a one-time onboarding gate rather than a numbered project — reasonable either way. A second Go-language cluster sits nearby in the graph (`net-cat`, `push-swap`, `my-ls-1`, `tetris-optimizer` + its 11 test-fixture folders, `atm-management-system`) at a position suggesting it comes either just before `go-reloaded` or interleaved right after `forum`, before JS piscine closes out this track — not confirmed by testimony, **Confidence: Medium**.
 
-Several flagship projects have nested folders adding optional features. Projects with only a plain `/audit` subfolder (no real bonus content) are omitted here: `add-vm`, `atm-management-system`, `bomberman-dom`, `carbon-copy`, `chaikin`, `clonernews`, `connect`, `corewar`, `crossword`, `drawing`, `ephemeris`, `filler`, `free-project`, `git`, `go-reloaded`, `graphql`, `guess-it-1`/`2`, `linear-stats`, `linux`, `localhost`, `login`, `math-skills`, `mini-framework`, `mister-quiz`, `multiplayer-fps`, `my-ls`/`my-ls-1`, `net-cat`, `netfix`, `push-swap`, `quad`, `quadchecker`, `remote`, `road_intersection`, `rt`, `scan`, `shop`, `smart-road`, `sortable`, `stock-exchange-sim`, `sudoku`, `system-monitor`, `tron`, `wget`, `zappy`.
+**Track 2 — AdminSys** (OS/network fundamentals, likely runs in parallel with the language tracks rather than after them — `linux` is foundational enough to start on day one). **Confidence: High for content/order (it's the one place besides Blockchain with an authored ordering — see §4.5's full table), Medium for exactly where it interleaves with the other four tracks.**
 
-| Parent | Bonus feature | What it adds | Optional? |
-|---|---|---|---|
-| `0-shell` | `job-control` | Shell job-control builtins (`jobs`/`bg`/`fg`/`kill`, Ctrl+Z) | Additive follow-on, not explicitly labeled |
-| `0-shell` | `scripting` | Parse/run actual shell scripts (loops, functions) | Additive follow-on |
-| `ascii-art` | `color` | `--color=<color>` flag | **Explicitly optional** |
-| `ascii-art` | `justify` | `--align=` flag with responsive layout | **Explicitly optional** |
-| `ascii-art` | `output` | `--output=<file>` flag | **Explicitly optional** |
-| `ascii-art` | `reverse` | ASCII-art → plain text | **Explicitly optional** |
-| `ascii-art` | `fs` | Selectable banner/font templates | **Explicitly optional** |
-| `ascii-art-web` | `dockerize` | Containerize the web app | Additive, not explicitly labeled |
-| `ascii-art-web` | `export-file` | Export result to a file | Additive |
-| `ascii-art-web` | `stylize` | Visual/accessible CSS pass | Additive |
-| `forum` | `advanced-features` | Like/dislike, notifications, activity page, edit/remove | Additive |
-| `forum` | `authentication` | Google/GitHub OAuth | Additive |
-| `forum` | `image-upload` | Image attachments on posts | Additive |
-| `forum` | `moderation` | 4-tier user roles, category filtering | **Explicitly optional** |
-| `forum` | `security` | HTTPS/TLS, rate limiting, hardened sessions | Additive (base README calls session/password encryption "a Bonus task") |
-| `groupie-tracker` | `filters` | Range/checkbox filters | Additive |
-| `groupie-tracker` | `geolocalization` | Map-plotted concert locations | Additive |
-| `groupie-tracker` | `search-bar` | Live typeahead search | Additive |
-| `groupie-tracker` | `visualizations` | UI-design-principles restyle | Additive |
-| `lem-in` | (ant-farm visualizer, no dedicated folder) | Inline bonus paragraph, not a separate tracked subject | Bonus |
-| `make-your-game` | `different-maps` | Custom tile-map engine, 3+ maps | Additive |
-| `make-your-game` | `history` | Story mode tied to score milestones | Additive |
-| `make-your-game` | `score-handling` | Go-backed persistent scoreboard | Additive |
-| `real-time-forum` | `typing-in-progress` | Live "user is typing…" via WebSocket | Additive |
-| `social-network` | `cross-platform-appimage` | Standalone Electron desktop client | **Explicitly optional** |
-| `tetris-optimizer` | `badexample*`/`goodexample*`/`hardexam` | Just test fixtures, not features | N/A |
+`linux` → `login` → `add-vm` → `connect` → `remote` → `scan` (then `upgrade` onward, mostly unbuilt — see §4.5). `check-points` — the Friday exam/checkpoint gate the student described ("Fridays was checkpoints/exam/test... those checkpoint questions aren't in the task we did during the week") — is its own labeled node in the graph, positioned near this track. Treat it as a **recurring periodic gate across the whole piscine**, not a single sequential item — this matches "every Friday" testimony exactly.
+
+**Track 3 — Algorithm** (Go-language, math/stats-flavored). **Confidence: Medium — graph position only, no cross-reference chain found.**
+
+`guess-it-1` → `guess-it-2` → `math-skills` → `linear-stats` (this cluster reads as chained — each explicitly builds on the stats concept from the previous one).
+
+**Track 4 — Full-Stack** (JavaScript, gated by Piscine JS — this is where a framework you build becomes reused). **Confidence: High for the internal chain (mini-framework's own README says it "will be tested by using it... in the social network project," confirming build-order), Medium for exactly which piscine unlocks it.**
+
+`mini-framework` → `social-network` (+ `cross-platform-appimage`) → `make-your-game` (+ `different-maps`, `history`, `score-handling`) → `bomberman-dom` → `real-time-forum` (+ `typing-in-progress`) → `graphql`. Also graph-adjacent to this zone: `stock-exchange-sim`, `mister-quiz`, `shop`, `netfix` (the "extend a given app in a new language" cluster — Django/Rails/Laravel/C++ — no cross-references tying them to each other or to a specific slot, **Confidence: Low on exact position**), and `clonernews` (possibly a JS-piscine raid rather than a Full-Stack-track project — see §6).
+
+**Track 5 — Architecture** (systems/Rust-flavored, gated by Piscine Rust). **Confidence: Medium-High — `smart-road` explicitly names its Rust-piscine-raid prerequisite; the rest is graph position.**
+
+`0-shell` (+ `job-control`, `scripting`) → `road_intersection` (Rust-piscine raid) → `smart-road` (explicit sequel) → `multiplayer-fps` → `corewar` → `filler` → `system-monitor`. `zappy` and `wget` sit near this zone in the graph too but have no cross-references anchoring them — **Confidence: Low** on their exact placement; `wget` in particular renders oddly close to the Blockchain branch sector in the image, almost certainly a force-directed-layout artifact rather than a real thematic link.
+
+**Piscine hub nodes, per the graph:** `PISCINE-JS` and `PISCINE-RUST` render as large hubs at the same radius (base piscines); `PISCINE-JS-UP`, `PISCINE-RUST-UP`, and `PISCINE-JS-2WEEKS` render as adjacent large nodes just past them — read as **advanced/continuation piscine modules** done immediately after the base piscine before the project tracks resume. Content for these three specifically wasn't isolated in the repo digest under those names — flag for follow-up (§8).
+
+**Then Piscine Java**, and the branch-selection hub — `PISCINE-UI` and `PISCINE-UX` render as large nodes right at the boundary into the outer branch arcs, i.e. the User Experience branch's own piscine doubles as (or sits right at) the branch-selection gate. The eight branch sectors follow, detailed in §5.
+
+**Items confirmed NOT to be Track projects** (piscine exercises/exams with long READMEs that landed in earlier drafts of this bucket): `add-vm`, `linux`, `login`, `connect`, `remote`, `scan` (Track 2 above, not separate), `teacher` (bash exam), `tetris-optimizer`'s test-fixture children, `sortable` (JS piscine day exercise), `block-chain` (JS piscine exercise — see §5.2's false-positive note), `minesweeper` (Rust piscine exercise), `dr-strange` (JS date-arithmetic exercise, misleading name), `events` (Rust piscine exam), `commandments` (onboarding read, `duration: 1 hour` in its own frontmatter), `where-do-we-go-dom` (JS/DOM exercise), `friend-support`/`gatecrashers`/`uninvited` (chained JS server exercises), `free-project` (JS-piscine raid), `how-2-js`/`good-practices`/`introduction` (piscine reference material), `sys` (§4.5's table itself, not a task).
 
 ---
 
@@ -477,6 +475,7 @@ Flagging these explicitly so nobody builds a Gauntlex task graph on top of silen
 - **`sqrt` vs `squareroot`** (Go piscine): both "return square root," slightly different contracts — verify relationship.
 - **Empty/broken subjects** (exclude from any learner-facing sequence): `unavailable` (README literally says "this subject is currently unavailable"), `argsort` (empty README), `firebase-demo` (heading only, no content).
 - **Meta, non-exercise entries** (informational, not tasks): `disclaimer` (Go exam formatting note), `functions` (describes a Zone01 aggregator repo), `commandments` (onboarding read), `good-practices`/`introduction`/`how-2-js` (piscine reference material).
+- **Shell-piscine name mismatch (unresolved).** A former student's confidently-remembered exact task names from their own shell piscine (`hello.sh`, `lookout.sh`, `mastertheboss.sh`, `skip.sh`, `myfirstcommit.sh`, `repository`, `status.sh`, `push.sh`) do not exist anywhere in this repo snapshot — confirmed via full-repo search. §4.4's `cl-camp*`/`to-git-or-not-to-git`/`who-are-you`/`now-get-to-work` cluster is this document's best content-based match for the same slot, but the naming doesn't line up at all. Likely explanations: the platform shows different display names than the repo's folder slugs, the selection-stage content lives in a separate/private repo, or the exercise set has simply been renamed since that student went through it. Don't assume the two are the same content without confirming.
 - **Official ordering docs are unreachable from this environment.** `docs/piscine-go-curriculum.md` and `docs/piscine-rust-curriculum.md` (and likely JS/Java equivalents) exist on 01-edu-family Gitea instances (`beta.01-edu.org`, `01.alem.school`, `01.kood.tech`) per web search results, but not in the GitHub-mirrored repo this document is based on, and direct fetches from this environment failed (DNS/connection errors). **Before treating this document's piscine-exercise tier/ordering as final, try fetching those three files from a network that can reach them** — they would supersede the content-based reconstruction in §4.1-4.3.
 - **Duration estimates are mostly unverified.** Very few project READMEs state an explicit duration; most numbers in this document's tables are either absent, marked "(est.)", or explicitly flagged as regex-extraction false positives (e.g., a sentence mentioning "7 days" that has nothing to do with project length). Don't surface these to end users as committed timelines without further verification.
 
@@ -508,7 +507,7 @@ Proposed top-level Track sequence, matching official pedagogy:
 3. **Sysadmin Piscine** (§4.5) — only 6 of 21 planned subjects exist; decide whether to include a 6-subject track or wait for more content
 4. **Piscine JavaScript** (§4.2)
 5. **Piscine Rust** (§4.3)
-6. **Core Project Phase** (§4.6 + §4.7) — the ~29 flagship projects; this is the longest phase (18 months in official pedagogy) and where most user time will be spent
+6. **Core Project Phase** (§4.6) — the ~29 flagship projects, organized into 5 parallel tracks (Imperative/AdminSys/Algorithm/Full-Stack/Architecture) per the platform graph; this is the longest phase (18 months in official pedagogy) and where most user time will be spent. Whether Gauntlex should actually run these 5 as concurrent unlockable tracks or flatten them into one sequential sub-track is an open product decision — see §8.9.
 7. **Piscine Java** (§5.4's `piscine/`/`checkpoints/`/`raids/` — note this is oddly sequenced *after* the core project phase in official pedagogy terms only if Java is picked as a branch; if Gauntlex treats all 4 language piscines as mandatory-then-branch-optional, Java's piscine content needs its own Track slot, separate from the Java Full-Stack branch)
 8. **Branch selection** — user picks ONE of the 8 branches (§5.1-5.8) as a Track; keep the other 7 defined in the data model but locked/hidden
 
@@ -525,3 +524,6 @@ Proposed top-level Track sequence, matching official pedagogy:
 5. **Does the "js-" prefixed algorithms cluster in Piscine JS (§4.2) belong interleaved with the narrative track, or as a separate later module?** No evidence either way was found in-repo; this is a product decision as much as a research question.
 6. **What's actually in `subjects/employment-tasks/`?** Confirmed to be recruiter-facing technical-screening tasks, not learner curriculum — almost certainly out of scope for Gauntlex, but worth a deliberate "yes, excluded" decision rather than an accidental omission.
 7. **Test-authoring plan for everything outside JS/DOM/Shell (§3).** This is the biggest unaddressed scope item this research surfaced: the overwhelming majority of subjects (all of Go piscine, all of Rust piscine, all ~29 core projects, all branch content) have zero automated tests in the source repo. Gauntlex's Docker-sandbox validation step needs a real plan for this — write tests per-subject as a content-production task, or lean harder on the AI Auditor to cover for the gap.
+8. **Verify the shell-piscine naming discrepancy (§6).** If there's any channel back to 01-edu, Zone01, or another partner school, confirm whether the platform's displayed task names ever matched `hello.sh`/`lookout.sh`/`mastertheboss.sh`/etc., or whether that content simply lives outside this public repo. Until resolved, treat §4.4's shell cluster as a best-guess stand-in, not a confirmed match.
+9. **Do the 5 core-project tracks (§4.6: Imperative/AdminSys/Algorithm/Full-Stack/Architecture) run concurrently for real students, or in a specific forced order?** The graph renders them as parallel arcs radiating from the piscine hub, and the AdminSys track (Linux fundamentals) plausibly starts on day one alongside the language piscines rather than after them — but no testimony or doc confirms the actual scheduling rule. This materially affects whether Gauntlex should unlock all 5 at once after Go piscine or gate them sequentially.
+10. **What exactly are `PISCINE-JS-UP`, `PISCINE-RUST-UP`, and `PISCINE-JS-2WEEKS`** (large hub nodes in the graph, positioned as continuation piscines right after the base JS/Rust piscines)? No corresponding content cluster was isolated for these three under those names in the repo digest — worth a targeted second pass through `subjects/` for advanced/continuation piscine content once §8.1's Gitea access question is resolved.
