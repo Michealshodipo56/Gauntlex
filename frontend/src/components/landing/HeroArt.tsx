@@ -61,7 +61,7 @@ function LanguagePickerCard({ className = "" }: { className?: string }) {
           <div
             key={lang.name}
             className={`flex items-center gap-2.5 rounded-xl px-3 py-1.5 text-xs font-semibold ${
-              i === 0 ? "bg-[#edf2fe] text-gray-900" : "text-gray-700 hover:bg-gray-50"
+              i === 0 ? "bg-[#EEE9FF] text-gray-900" : "text-gray-700 hover:bg-gray-50"
             }`}
           >
             <Icon size={15} color={lang.color} className="shrink-0" />
@@ -79,7 +79,7 @@ function LanguagePickerCard({ className = "" }: { className?: string }) {
 function RunBadge({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-3 shadow-xl ${className}`}>
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#6001ff] text-white shadow-sm">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#6332F6] text-white shadow-sm">
         <Check size={18} strokeWidth={3} />
       </span>
       <div className="leading-tight">
@@ -93,7 +93,7 @@ function RunBadge({ className = "" }: { className?: string }) {
 function StickyNote({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative w-36 rounded-2xl bg-[#c6ff00] p-4 text-gray-950 shadow-xl select-none ${className}`}
+      className={`relative w-36 rounded-2xl bg-[#BDFA47] p-4 text-gray-950 shadow-xl select-none ${className}`}
     >
       <div className="font-hand text-xl font-bold leading-snug tracking-wide text-center">
         <div>Code</div>
@@ -121,12 +121,12 @@ function StickyNote({ className = "" }: { className?: string }) {
 
 function OutputPanel({ className = "" }: { className?: string }) {
   return (
-    <div className={`overflow-hidden rounded-2xl border border-white/10 bg-[#0c1017] shadow-2xl ${className}`}>
+    <div className={`overflow-hidden rounded-2xl border border-white/10 bg-[#11121B] shadow-2xl ${className}`}>
       <div className="flex gap-5 border-b border-white/10 px-4 pt-3 text-xs font-semibold">
         {["Output", "Test Results", "AI Guide"].map((tab, i) => (
           <span
             key={tab}
-            className={`pb-2.5 cursor-default ${i === 0 ? "border-b-2 border-[#c6ff00] text-white" : "text-gray-400"}`}
+            className={`pb-2.5 cursor-default ${i === 0 ? "border-b-2 border-[#BDFA47] text-white" : "text-gray-400"}`}
           >
             {tab}
           </span>
@@ -135,7 +135,7 @@ function OutputPanel({ className = "" }: { className?: string }) {
       <div className="space-y-2 px-4 py-3.5 font-mono text-[12px]">
         <p className="text-white font-medium">Hello, Gauntlex! 👋</p>
         <p className="flex items-center gap-2 text-gray-400 text-[11px]">
-          <span className="h-2 w-2 rounded-full bg-[#c6ff00]" />
+          <span className="h-2 w-2 rounded-full bg-[#BDFA47]" />
           Program executed successfully.
         </p>
       </div>
@@ -156,7 +156,7 @@ export function HeroArt() {
         >
           <path
             d="M480 160C540 240 560 360 490 440C420 520 300 560 210 510C120 460 60 320 110 220C160 120 320 80 480 160Z"
-            fill="#6001ff"
+            fill="#6332F6"
             fillOpacity="0.9"
           />
         </svg>
@@ -168,7 +168,7 @@ export function HeroArt() {
         >
           <path
             d="M100 240C60 160 140 70 240 80C340 90 420 180 390 280C360 380 260 420 170 390C80 360 140 320 100 240Z"
-            fill="#c6ff00"
+            fill="#BDFA47"
             fillOpacity="0.8"
           />
         </svg>
@@ -192,9 +192,9 @@ export function HeroArt() {
         {/* Floating rays in top right */}
         <div className="absolute top-6 right-24 z-10">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M10 20C18 16 28 14 34 10" stroke="#6001ff" strokeWidth="3" strokeLinecap="round" />
-            <path d="M16 28C22 24 30 20 38 18" stroke="#6001ff" strokeWidth="2.5" strokeLinecap="round" />
-            <path d="M22 34C28 32 32 28 36 26" stroke="#6001ff" strokeWidth="2" strokeLinecap="round" />
+            <path d="M10 20C18 16 28 14 34 10" stroke="#6332F6" strokeWidth="3" strokeLinecap="round" />
+            <path d="M16 28C22 24 30 20 38 18" stroke="#6332F6" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M22 34C28 32 32 28 36 26" stroke="#6332F6" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </div>
 
