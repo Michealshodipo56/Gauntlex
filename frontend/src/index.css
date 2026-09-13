@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Gauntlex page palette (logo mark keeps its own exact brand hex — see Logo.tsx) */
-  --color-lime: #bdfa47;
-  --color-lime-bright: #b8ff20;
+  /* Gauntlex brand kit */
+  --color-lime: #c6ff00;
   --color-lime-dark: #a2db00;
-  --color-violet: #7551cc;
-  --color-violet-light: #6332f6;
+  --color-violet: #6001ff;
+  --color-violet-light: #7c26ff;
   --color-violet-dark: #4d00cc;
-  --color-violet-soft: #eee9ff;
-  --color-midnight: #11121b;
-  --color-ink-deep: #0c0b18;
-  --color-surface: #f8f8f9;
-  --color-border: #e9e7ed;
+  --color-midnight: #0c1017;
+  --color-surface: #ffffff;
 
-  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-hand: "Patrick Hand", cursive, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-hand: "Caveat", cursive, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
