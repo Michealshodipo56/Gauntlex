@@ -1,16 +1,19 @@
-import { SignInButton, SignUpButton } from "@clerk/clerk-react";
+import { CTA } from "../components/landing/CTA";
+import { CurriculumPreview } from "../components/landing/CurriculumPreview";
+import { Header } from "../components/landing/Header";
+import { Hero } from "../components/landing/Hero";
+import { HowItWorks } from "../components/landing/HowItWorks";
+import { Playground } from "../components/landing/Playground";
 
 export function Landing() {
   return (
-    <main>
-      <h1>Gauntlex</h1>
-      <p>An AI-guided, project-based coding education platform.</p>
-      <SignInButton mode="modal">
-        <button type="button">Sign in</button>
-      </SignInButton>
-      <SignUpButton mode="modal">
-        <button type="button">Sign up</button>
-      </SignUpButton>
+    <main className="overflow-x-hidden bg-surface">
+      <Header />
+      <Hero />
+      <HowItWorks />
+      <Playground />
+      <CurriculumPreview />
+      <CTA />
     </main>
   );
 }

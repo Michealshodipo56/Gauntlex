@@ -1,6 +1,22 @@
-/* Intentionally minimal — real styling/theme comes once the UI style guide is provided. */
+@import "tailwindcss";
+
+@theme {
+  /* Gauntlex brand kit (see /logo_overview.png) */
+  --color-lime: #c6ff00;
+  --color-lime-dark: #a8db00;
+  --color-violet: #6a00ff;
+  --color-violet-light: #8b3bff;
+  --color-violet-dark: #52029c;
+  --color-midnight: #0b0f14;
+  --color-surface: #f8f9fc;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 * {
@@ -9,5 +25,13 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: var(--color-midnight);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-midnight);
 }
