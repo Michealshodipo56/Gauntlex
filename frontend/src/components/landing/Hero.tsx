@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Box, Play, Star, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import { CategoryPills } from "./CategoryPills";
 import { HeroArt } from "./HeroArt";
 
@@ -62,15 +63,15 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-wrap items-center gap-5">
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2.5 rounded-full bg-[#c6ff00] px-7 py-3.5 font-bold text-black shadow-[0_8px_20px_-6px_rgba(198,255,0,0.8)] transition-all hover:bg-[#bbf000]"
-            >
-              Get Started Free
-              <ArrowRight size={18} strokeWidth={2.5} />
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                to="/sign-up"
+                className="flex items-center gap-2.5 rounded-full bg-[#c6ff00] px-7 py-3.5 font-bold text-black shadow-[0_8px_20px_-6px_rgba(198,255,0,0.8)] transition-all hover:bg-[#bbf000]"
+              >
+                Get Started Free
+                <ArrowRight size={18} strokeWidth={2.5} />
+              </Link>
+            </motion.div>
             <motion.a
               href="#"
               whileHover={{ scale: 1.03 }}

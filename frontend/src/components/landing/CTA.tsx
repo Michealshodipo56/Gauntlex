@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { CrownDoodle } from "./Doodles";
 import { LogoMark } from "./Logo";
 
@@ -59,14 +60,14 @@ export function CTA() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2.5 rounded-full bg-[#c6ff00] px-7 py-3.5 text-sm font-bold text-black shadow-[0_8px_20px_-6px_rgba(198,255,0,0.8)] hover:bg-[#bbf000] transition-all"
-              >
-                Get Started Free <ArrowRight size={17} strokeWidth={2.5} />
-              </motion.a>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  to="/sign-up"
+                  className="flex items-center gap-2.5 rounded-full bg-[#c6ff00] px-7 py-3.5 text-sm font-bold text-black shadow-[0_8px_20px_-6px_rgba(198,255,0,0.8)] hover:bg-[#bbf000] transition-all"
+                >
+                  Get Started Free <ArrowRight size={17} strokeWidth={2.5} />
+                </Link>
+              </motion.div>
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.06)" }}

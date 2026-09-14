@@ -1,6 +1,8 @@
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
 import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 
 const NAV_LINKS = ["Curriculum", "Playground", "For Programs", "About"];
@@ -44,20 +46,31 @@ export function Header() {
         </div>
 
         <div className="hidden items-center gap-4 sm:flex">
-          <button
-            type="button"
-            className="px-2 py-2 text-sm font-semibold text-gray-700 transition-colors hover:text-midnight"
-          >
-            Log in
-          </button>
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="rounded-lg bg-[#6001ff] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(96,1,255,0.35)] transition-all hover:bg-[#5200db]"
-          >
-            Sign Up
-          </motion.button>
+          <SignedOut>
+            <Link
+              to="/sign-in"
+              className="px-2 py-2 text-sm font-semibold text-gray-700 transition-colors hover:text-midnight"
+            >
+              Log in
+            </Link>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                to="/sign-up"
+                className="block rounded-lg bg-[#6001ff] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(96,1,255,0.35)] transition-all hover:bg-[#5200db]"
+              >
+                Sign Up
+              </Link>
+            </motion.div>
+          </SignedOut>
+          <SignedIn>
+            <Link
+              to="/dashboard"
+              className="px-2 py-2 text-sm font-semibold text-gray-700 transition-colors hover:text-midnight"
+            >
+              Dashboard
+            </Link>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
         </div>
 
         <button
@@ -84,17 +97,33 @@ export function Header() {
               </a>
             ))}
           </div>
-          <div className="mt-3 flex gap-3">
-            <button
-              type="button"
-              className="flex-1 rounded-full border border-midnight/15 px-4 py-2.5 text-sm font-semibold text-midnight"
-            >
-              Log in
-            </button>
-            <button type="button" className="flex-1 rounded-full bg-violet px-4 py-2.5 text-sm font-semibold text-white">
-              Sign Up
-            </button>
-          </div>
+          <SignedOut>
+            <div className="mt-3 flex gap-3">
+              <Link
+                to="/sign-in"
+                className="flex-1 rounded-full border border-midnight/15 px-4 py-2.5 text-center text-sm font-semibold text-midnight"
+              >
+                Log in
+              </Link>
+              <Link
+                to="/sign-up"
+                className="flex-1 rounded-full bg-violet px-4 py-2.5 text-center text-sm font-semibold text-white"
+              >
+                Sign Up
+              </Link>
+            </div>
+          </SignedOut>
+          <SignedIn>
+            <div className="mt-3 flex items-center gap-3">
+              <Link
+                to="/dashboard"
+                className="flex-1 rounded-full border border-midnight/15 px-4 py-2.5 text-center text-sm font-semibold text-midnight"
+              >
+                Dashboard
+              </Link>
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </SignedIn>
         </motion.div>
       )}
     </motion.header>
